@@ -36,7 +36,7 @@ export default function ClassementPage() {
 
   return (
     <div className="page animate-in">
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Classement</h2>
+      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Gradante</h2>
 
       {/* Tabs */}
       <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: '20px' }}>
@@ -50,7 +50,7 @@ export default function ClassementPage() {
           style={{ flex: 1, background: 'none', border: 'none', padding: '12px', color: tab === 'fams' ? 'var(--accent)' : 'var(--text-muted)', borderBottom: tab === 'fams' ? '2px solid var(--accent)' : '2px solid transparent', fontWeight: tab === 'fams' ? 'bold' : 'normal', cursor: 'pointer', transition: 'var(--transition)' }}
           onClick={() => setTab('fams')}
         >
-          Fam's (Moyenne)
+          Fam's (Moy's)
         </button>
       </div>
 
@@ -96,7 +96,7 @@ export default function ClassementPage() {
                     </div>
                     <div className="pts" style={{ textAlign: 'right' }}>
                       <div style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{Math.round(fam.moyenne_points * 10) / 10} PC</div>
-                      <small style={{ color: 'var(--text-muted)' }}>Moyenne</small>
+                      <small style={{ color: 'var(--text-muted)' }}>Moy's</small>
                     </div>
                   </div>
                 )

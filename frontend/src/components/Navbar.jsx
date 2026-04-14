@@ -8,13 +8,13 @@ export default function Navbar() {
 
   const items = isAncien
     ? [
-        { to: '/dashboard', icon: '🏠', label: 'Accueil' },
-        { to: '/log', icon: '📝', label: 'Logger' },
-        { to: '/classement', icon: '🏆', label: 'Classement' },
+        { to: '/dashboard', icon: '🏠', label: 'Tabagn\'s' },
+        { to: '/log', icon: '📝', label: 'Dégueul\'s' },
+        { to: '/classement', icon: '🏆', label: 'Gradante' },
       ]
     : [
         { to: '/dashboard', icon: '🏠', label: 'Mon Score' },
-        { to: '/classement', icon: '🏆', label: 'Classement' },
+        { to: '/classement', icon: '🏆', label: 'Gradante' },
       ]
 
   return (

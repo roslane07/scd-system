@@ -26,9 +26,9 @@ export default function ForgotPasswordPage() {
   return (
     <div className="page-center animate-in">
       <div className="card-glass" style={{ width: '100%', maxWidth: '360px' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '8px' }}>Mot de passe oublié</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '8px' }}>Mot d'axe oublié</h2>
         <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '24px' }}>
-          Renseigne ton adresse email pour recevoir un lien de réinitialisation.
+          Renseigne ta babill's pour recevoir un lien de réinitialisation.
         </p>
 
         {successMsg ? (
@@ -37,12 +37,12 @@ export default function ForgotPasswordPage() {
               ✅ {successMsg}
             </div>
             <br />
-            <Link to="/login" className="btn btn-primary btn-block">Retour à la connexion</Link>
+            <Link to="/login" className="btn btn-primary btn-block">Retour à l'axance</Link>
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="input-group">
-              <label>Email</label>
+              <label>Babill's</label>
               <input 
                 type="email" 
                 className="input" 
@@ -56,11 +56,11 @@ export default function ForgotPasswordPage() {
             {errorMsg && <div style={{ color: 'var(--danger)', fontSize: '0.85rem', marginBottom: '16px', textAlign: 'center' }}>{errorMsg}</div>}
 
             <button type="submit" className="btn btn-primary btn-block" disabled={isLoading} style={{ marginTop: '8px' }}>
-              {isLoading ? <div className="spinner" style={{ width: '18px', height: '18px', borderWidth: '2px' }}></div> : "Envoyer le lien"}
+              {isLoading ? <div className="spinner" style={{ width: '18px', height: '18px', borderWidth: '2px' }}></div> : "F.C. le lien"}
             </button>
 
             <div style={{ textAlign: 'center', marginTop: '24px' }}>
-              <Link to="/login" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>← Retour au login</Link>
+              <Link to="/login" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>← Retour à l'axance</Link>
             </div>
           </form>
         )}

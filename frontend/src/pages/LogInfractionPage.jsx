@@ -71,7 +71,7 @@ export default function LogInfractionPage() {
       <div className="page animate-in">
         <header style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
           <button className="btn btn-ghost" onClick={() => navigate('/dashboard')} style={{ padding: '8px' }}>←</button>
-          <h2 style={{ margin: 0, fontSize: '1.2rem' }}>Choisir un conscrit</h2>
+          <h2 style={{ margin: 0, fontSize: '1.2rem' }}>Choisir un .onscrit</h2>
         </header>
 
         <div className="search-bar">
@@ -79,7 +79,7 @@ export default function LogInfractionPage() {
           <input 
             type="text" 
             className="input" 
-            placeholder="Rechercher nom, buque..." 
+            placeholder="Fouiner nom, bucque..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             autoFocus
@@ -153,20 +153,20 @@ export default function LogInfractionPage() {
       <div className="page-center animate-in">
         
         {success && (
-          <div className="toast-container"><div className="toast success">Action confirmée ✅</div></div>
+          <div className="toast-container"><div className="toast success">Dégueul's rap'sée, trad'ssement. ✅</div></div>
         )}
         {error && (
           <div className="toast-container"><div className="toast error">{error}</div></div>
         )}
 
         <div className="card" style={{ width: '100%', maxWidth: '360px' }}>
-          <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>Confirmation</h2>
+          <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>Poilser la dégueul's ?</h2>
           
           <div style={{ background: 'var(--bg-secondary)', padding: '16px', borderRadius: 'var(--radius-sm)', marginBottom: '16px' }}>
-            <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Conscrit</div>
+            <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>.onscrit</div>
             <div style={{ fontWeight: 600, marginBottom: '12px' }}>{selectedConscrit.nom} {selectedConscrit.prenom}</div>
             
-            <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Infraction</div>
+            <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Dégueul's</div>
             <div style={{ fontWeight: 600 }}>{selectedInfraction.code} — {selectedInfraction.nom}</div>
             <div style={{ color: selectedInfraction.points < 0 ? 'var(--danger)' : 'var(--success)', fontWeight: 'bold', fontSize: '1.2rem', margin: '4px 0' }}>
               {selectedInfraction.points > 0 ? '+' : ''}{selectedInfraction.points} points
@@ -191,10 +191,10 @@ export default function LogInfractionPage() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '24px' }}>
             <button className="btn btn-primary btn-lg" onClick={handleConfirm} disabled={isSubmitting}>
-              {isSubmitting ? <span className="spinner" style={{ width: '20px', height: '20px', borderWidth: '2px' }}/> : "✅ CONFIRMER"}
+              {isSubmitting ? <span className="spinner" style={{ width: '20px', height: '20px', borderWidth: '2px' }}/> : "✅ POILSER"}
             </button>
             <button className="btn btn-ghost" onClick={() => setStep(2)} disabled={isSubmitting}>
-              ❌ Annuler
+              ❌ Efcer
             </button>
           </div>
         </div>

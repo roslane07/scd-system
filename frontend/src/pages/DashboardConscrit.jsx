@@ -38,7 +38,7 @@ export default function DashboardConscrit() {
   return (
     <div className="page animate-in">
       <header style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}>
-        <button className="btn btn-ghost" onClick={logout} style={{ padding: '6px 12px', fontSize: '0.8rem' }}>Déconnexion</button>
+        <button className="btn btn-ghost" onClick={logout} style={{ padding: '6px 12px', fontSize: '0.8rem' }}>Chasser</button>
       </header>
 
       <div className="card-glass" style={{ textAlign: 'center', padding: '32px 16px', marginBottom: '24px', position: 'relative', overflow: 'hidden' }}>
@@ -71,7 +71,7 @@ export default function DashboardConscrit() {
 
       {restrictions && restrictions.length > 0 && (
         <section style={{ marginBottom: '24px' }}>
-          <h3 style={{ fontSize: '1rem', marginBottom: '12px', color: 'var(--danger)' }}>🚫 Restrictions Actives</h3>
+          <h3 style={{ fontSize: '1rem', marginBottom: '12px', color: 'var(--danger)' }}>🚫 Poches Actives</h3>
           <div className="card" style={{ background: 'var(--danger-bg)', borderColor: 'rgba(239, 68, 68, 0.2)' }}>
             <ul style={{ paddingLeft: '20px', margin: 0, color: 'var(--text-primary)', fontSize: '0.9rem' }}>
               {restrictions.map((r, i) => <li key={i} style={{ marginBottom: '8px' }}>{r}</li>)}
@@ -81,10 +81,10 @@ export default function DashboardConscrit() {
       )}
 
       <section>
-        <h3 style={{ fontSize: '1rem', marginBottom: '12px' }}>⏱ Historique Récent</h3>
+        <h3 style={{ fontSize: '1rem', marginBottom: '12px' }}>⏱ Rap's Récent</h3>
         <div className="card" style={{ padding: '0' }}>
           {logs.length === 0 ? (
-            <div style={{ padding: '20px', textAlign: 'center', color: 'var(--text-muted)' }}>Aucun point perdu. Continue !</div>
+            <div style={{ padding: '20px', textAlign: 'center', color: 'var(--text-muted)' }}>Aucun point perdu. Dans l'axe, cop's !</div>
           ) : (
             logs.slice(0, 15).map((log, index) => {
               const dateObj = new Date(log.timestamp)
@@ -103,7 +103,7 @@ export default function DashboardConscrit() {
                   </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 600, fontSize: '0.9rem', textDecoration: isAnnule ? 'line-through' : 'none' }}>
-                      {log.code_infraction} {isAnnule && <span style={{ fontSize: '0.7rem', color: 'var(--danger)', marginLeft: '4px' }}>(ANNULÉ)</span>}
+                      {log.code_infraction} {isAnnule && <span style={{ fontSize: '0.7rem', color: 'var(--danger)', marginLeft: '4px' }}>(EFCÉ)</span>}
                     </div>
                     {log.commentaire && <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{log.commentaire}</div>}
                   </div>

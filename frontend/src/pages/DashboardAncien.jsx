@@ -45,10 +45,10 @@ export default function DashboardAncien() {
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
           <h2 style={{ fontSize: '1.2rem', margin: 0 }}>Salut {displayName}</h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Prêt à vérifier la cohésion ?</p>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Prêt à vérifier la cohésion, cop's ?</p>
         </div>
         <button className="btn btn-ghost" onClick={logout} style={{ padding: '8px 12px' }}>
-          Déconnexion
+          Chasser
         </button>
       </header>
 
@@ -85,16 +85,16 @@ export default function DashboardAncien() {
             onClick={() => navigate('/log')}
             style={{ marginBottom: '32px' }}
           >
-            📝 Logger une infraction
+            📝 Logger une dégueul's
           </button>
 
           <section>
             <h3 style={{ marginBottom: '12px', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              ⚠️ En danger <span style={{ fontSize: '0.8rem', background: 'var(--bg-secondary)', padding: '2px 8px', borderRadius: '10px' }}>{danger.length}</span>
+              ⚠️ Tuss ! <span style={{ fontSize: '0.8rem', background: 'var(--bg-secondary)', padding: '2px 8px', borderRadius: '10px' }}>{danger.length}</span>
             </h3>
             {danger.length === 0 ? (
               <div className="card" style={{ textAlign: 'center', padding: '24px', color: 'var(--text-muted)' }}>
-                Aucun conscrit en danger pour le moment.
+                Aucun .onscrit en tuss pour le moment. Impec's !
               </div>
             ) : (
               <div>

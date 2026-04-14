@@ -78,7 +78,7 @@ export default function SetupPage() {
   return (
     <div className="page-center animate-in">
       <div className="card-glass" style={{ width: '100%', maxWidth: '400px' }}>
-        <h2 style={{ marginBottom: '24px', textAlign: 'center' }}>Configuration Profil</h2>
+        <h2 style={{ marginBottom: '24px', textAlign: 'center' }}>Première Axance</h2>
         
         {/* Stepper */}
         <div className="stepper">
@@ -93,10 +93,10 @@ export default function SetupPage() {
         {step === 1 && (
           <div className="animate-in">
             <h3 style={{ marginBottom: '8px' }}>Étape 1 : Sécurité</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>Bienvenue ! Change ton mot de passe par défaut et renseigne ton email.</p>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>Bienv's cop's ! Change ton mot d'axe par défaut et renseigne ta babill's.</p>
             
             <div className="input-group">
-              <label>Nouvel Email <span style={{ color: 'var(--danger)' }}>*</span></label>
+              <label>Babill's électronique <span style={{ color: 'var(--danger)' }}>*</span></label>
               <input 
                 type="email" 
                 className="input" 
@@ -106,7 +106,7 @@ export default function SetupPage() {
               />
             </div>
             <div className="input-group">
-              <label>Nouveau Mot de Passe (min 8 car.) <span style={{ color: 'var(--danger)' }}>*</span></label>
+              <label>Nouveau Mot d'axe (min 8 car.) <span style={{ color: 'var(--danger)' }}>*</span></label>
               <input 
                 type="password" 
                 className="input" 
@@ -116,7 +116,7 @@ export default function SetupPage() {
               />
             </div>
             <div className="input-group">
-              <label>Confirmer Mot de Passe <span style={{ color: 'var(--danger)' }}>*</span></label>
+              <label>Confirmer Mot d'axe <span style={{ color: 'var(--danger)' }}>*</span></label>
               <input 
                 type="password" 
                 className="input" 
@@ -133,17 +133,17 @@ export default function SetupPage() {
         {/* STEP 2: IDENTITÉ GADZARTS */}
         {step === 2 && (
           <div className="animate-in">
-            <h3 style={{ marginBottom: '8px' }}>Étape 2 : Identité Gadzarts</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>Si tu as déjà ta buque (ou que tu n'es plus conscrit), renseigne-la ici. Optionnel en usins.</p>
+            <h3 style={{ marginBottom: '8px' }}>Étape 2 : Zgrise Gadz'arique</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>Si tu as déjà ta bucque (ou que tu n'es plus .onscrit), renseigne-la ici. Optionnel en usins.</p>
             
             <div className="input-group">
-              <label>Buque</label>
+              <label>Bucque</label>
               <input 
                 type="text" 
                 className="input" 
                 value={buque} 
                 onChange={(e) => setBuque(e.target.value)} 
-                placeholder="Ta buque..."
+                placeholder="Ta bucque..."
               />
             </div>
             <div className="input-group">
@@ -185,7 +185,7 @@ export default function SetupPage() {
             <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
               <button className="btn btn-ghost" onClick={handleBack} disabled={isLoading} style={{ flex: 1 }}>Retour</button>
               <button className="btn btn-primary" onClick={handleFinish} disabled={isLoading} style={{ flex: 2 }}>
-                {isLoading ? <span className="spinner" style={{ width: '16px', height: '16px', borderWidth: '2px' }} /> : 'Terminer'}
+                {isLoading ? <span className="spinner" style={{ width: '16px', height: '16px', borderWidth: '2px' }} /> : 'Poilser !'}
               </button>
             </div>
           </div>
