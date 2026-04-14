@@ -94,7 +94,7 @@ export default function DashboardAncien() {
             </h3>
             {danger.length === 0 ? (
               <div className="card" style={{ textAlign: 'center', padding: '24px', color: 'var(--text-muted)' }}>
-                Aucun .onscrit en tuss pour l'instant. Impec's, tout est à la cote !
+                Aucun conscrit en tuss pour l'instant. Impec's, tout est à la cote !
               </div>
             ) : (
               <div>

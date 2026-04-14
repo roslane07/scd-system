@@ -71,7 +71,7 @@ export default function LogInfractionPage() {
       <div className="page animate-in">
         <header style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
           <button className="btn btn-ghost" onClick={() => navigate('/dashboard')} style={{ padding: '8px' }}>←</button>
-          <h2 style={{ margin: 0, fontSize: '1.2rem' }}>Cibler le .onscrit</h2>
+          <h2 style={{ margin: 0, fontSize: '1.2rem' }}>Cibler le conscrit</h2>
         </header>
 
         <div className="search-bar">

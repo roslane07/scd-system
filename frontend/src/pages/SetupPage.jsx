@@ -148,7 +148,7 @@ export default function SetupPage() {
         {step === 2 && (
           <div className="animate-in">
             <h3 style={{ marginBottom: '8px' }}>Étape 2 : Zgrise Gadz'arique</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>Si tu as déjà ta bucque (ou que tu n'es plus .onscrit), renseigne-la ici. Optionnel en usins.</p>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>Si tu as déjà ta bucque (ou que tu n'es plus conscrit), renseigne-la ici. Optionnel en usins.</p>
             
             <div className="input-group">
               <label>Bucque</label>
