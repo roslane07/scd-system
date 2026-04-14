@@ -45,10 +45,10 @@ export default function DashboardAncien() {
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
           <h2 style={{ fontSize: '1.2rem', margin: 0 }}>Salut {displayName}</h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Prêt à vérifier la cohésion, cop's ?</p>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Prêt à zinguer la cohésion, cop's ?</p>
         </div>
         <button className="btn btn-ghost" onClick={logout} style={{ padding: '8px 12px' }}>
-          Chasser
+          Se décaler's
         </button>
       </header>
 
@@ -85,7 +85,7 @@ export default function DashboardAncien() {
             onClick={() => navigate('/log')}
             style={{ marginBottom: '32px' }}
           >
-            📝 Logger une dégueul's
+            📝 R'singuer un gadz
           </button>
 
           <section>
@@ -94,7 +94,7 @@ export default function DashboardAncien() {
             </h3>
             {danger.length === 0 ? (
               <div className="card" style={{ textAlign: 'center', padding: '24px', color: 'var(--text-muted)' }}>
-                Aucun .onscrit en tuss pour le moment. Impec's !
+                Aucun .onscrit en tuss pour l'instant. Impec's, tout est à la cote !
               </div>
             ) : (
               <div>

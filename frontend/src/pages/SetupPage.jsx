@@ -10,7 +10,9 @@ export default function SetupPage() {
   
   // Form state
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [email, setEmail] = useState('')
   const [buque, setBuque] = useState('')
   const [numeroFams, setNumeroFams] = useState('')
@@ -92,8 +94,8 @@ export default function SetupPage() {
         {/* STEP 1: SECURITY */}
         {step === 1 && (
           <div className="animate-in">
-            <h3 style={{ marginBottom: '8px' }}>Étape 1 : Sécurité</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>Bienv's cop's ! Change ton mot d'axe par défaut et renseigne ta babill's.</p>
+            <h3 style={{ marginBottom: '8px' }}>Étape 1 : ZAlarme</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>Bienv's cop's ! Change ton mot d'axe par défaut et renseigne ta babill's (biffe ta bique si t'es pas en usins).</p>
             
             <div className="input-group">
               <label>Babill's électronique <span style={{ color: 'var(--danger)' }}>*</span></label>
@@ -107,23 +109,35 @@ export default function SetupPage() {
             </div>
             <div className="input-group">
               <label>Nouveau Mot d'axe (min 8 car.) <span style={{ color: 'var(--danger)' }}>*</span></label>
-              <input 
-                type="password" 
-                className="input" 
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-                placeholder="••••••••"
-              />
+              <div style={{ position: 'relative' }}>
+                <input 
+                  type={showPassword ? 'text' : 'password'}
+                  className="input" 
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)} 
+                  placeholder="••••••••"
+                  style={{ paddingRight: '48px' }}
+                />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '1.1rem', padding: '4px 8px' }}>
+                  {showPassword ? '🙈' : '👁️'}
+                </button>
+              </div>
             </div>
             <div className="input-group">
               <label>Confirmer Mot d'axe <span style={{ color: 'var(--danger)' }}>*</span></label>
-              <input 
-                type="password" 
-                className="input" 
-                value={confirmPassword} 
-                onChange={(e) => setConfirmPassword(e.target.value)} 
-                placeholder="••••••••"
-              />
+              <div style={{ position: 'relative' }}>
+                <input 
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  className="input" 
+                  value={confirmPassword} 
+                  onChange={(e) => setConfirmPassword(e.target.value)} 
+                  placeholder="••••••••"
+                  style={{ paddingRight: '48px' }}
+                />
+                <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '1.1rem', padding: '4px 8px' }}>
+                  {showConfirmPassword ? '🙈' : '👁️'}
+                </button>
+              </div>
             </div>
 
             <button className="btn btn-primary btn-block" onClick={handleNext} style={{ marginTop: '16px' }}>Suivant</button>
@@ -158,7 +172,7 @@ export default function SetupPage() {
             </div>
 
             <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
-              <button className="btn btn-ghost" onClick={handleBack} style={{ flex: 1 }}>Retour</button>
+              <button className="btn btn-ghost" onClick={handleBack} style={{ flex: 1 }}>← Efcer</button>
               <button className="btn btn-primary" onClick={handleNext} style={{ flex: 2 }}>Suivant</button>
             </div>
           </div>
@@ -183,7 +197,7 @@ export default function SetupPage() {
             </div>
 
             <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
-              <button className="btn btn-ghost" onClick={handleBack} disabled={isLoading} style={{ flex: 1 }}>Retour</button>
+              <button className="btn btn-ghost" onClick={handleBack} disabled={isLoading} style={{ flex: 1 }}>← Efcer</button>
               <button className="btn btn-primary" onClick={handleFinish} disabled={isLoading} style={{ flex: 2 }}>
                 {isLoading ? <span className="spinner" style={{ width: '16px', height: '16px', borderWidth: '2px' }} /> : 'Poilser !'}
               </button>

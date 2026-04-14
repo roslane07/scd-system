@@ -71,7 +71,7 @@ export default function LogInfractionPage() {
       <div className="page animate-in">
         <header style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
           <button className="btn btn-ghost" onClick={() => navigate('/dashboard')} style={{ padding: '8px' }}>←</button>
-          <h2 style={{ margin: 0, fontSize: '1.2rem' }}>Choisir un .onscrit</h2>
+          <h2 style={{ margin: 0, fontSize: '1.2rem' }}>Cibler le .onscrit</h2>
         </header>
 
         <div className="search-bar">
@@ -79,7 +79,7 @@ export default function LogInfractionPage() {
           <input 
             type="text" 
             className="input" 
-            placeholder="Fouiner nom, bucque..." 
+            placeholder="Fouiner par nom, bucque, pat's..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             autoFocus
@@ -160,10 +160,10 @@ export default function LogInfractionPage() {
         )}
 
         <div className="card" style={{ width: '100%', maxWidth: '360px' }}>
-          <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>Poilser la dégueul's ?</h2>
+          <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>Torche-la cette dégueul's ?</h2>
           
           <div style={{ background: 'var(--bg-secondary)', padding: '16px', borderRadius: 'var(--radius-sm)', marginBottom: '16px' }}>
-            <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>.onscrit</div>
+            <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Gadz visé</div>
             <div style={{ fontWeight: 600, marginBottom: '12px' }}>{selectedConscrit.nom} {selectedConscrit.prenom}</div>
             
             <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Dégueul's</div>
@@ -178,13 +178,13 @@ export default function LogInfractionPage() {
           </div>
 
           <div className="input-group">
-            <label>Commentaire (optionnel)</label>
+            <label>Babill's (optionnel)</label>
             <textarea 
               className="input" 
               rows="2" 
               value={commentaire} 
               onChange={(e) => setCommentaire(e.target.value)}
-              placeholder="Justification rapide..."
+              placeholder="Justif' rapide, raison du zinguage..."
               style={{ resize: 'none' }}
             />
           </div>

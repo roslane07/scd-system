@@ -35,7 +35,7 @@ export default function LoginPage() {
         navigate('/dashboard')
       }
     } catch (err) {
-      setError(err.message || "Email/nom ou mot de passe incorrect")
+      setError(err.message || "Babill's ou mot d'axe dézoné — vérifie cop's")
     } finally {
       setIsLoading(false)
     }
@@ -44,7 +44,7 @@ export default function LoginPage() {
   return (
     <div className="page-center animate-in">
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <img src="/am-logo.png" alt="AM" style={{ width: '80px', height: 'auto', marginBottom: '16px', filter: 'invert(1) brightness(2)', opacity: 0.9 }} />
+        <img src="/am-icon.png" alt="AM" style={{ width: '100px', height: 'auto', marginBottom: '16px', opacity: 0.95 }} />
         <h1 style={{ background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '3rem', fontWeight: 900, marginBottom: '8px', letterSpacing: '-1px' }}>SCD</h1>
         <p style={{ color: 'var(--text-secondary)' }}>Système de Cohésion & Discipline</p>
       </div>

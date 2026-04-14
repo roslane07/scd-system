@@ -9,11 +9,11 @@ export default function Navbar() {
   const items = isAncien
     ? [
         { to: '/dashboard', icon: '🏠', label: 'Tabagn\'s' },
-        { to: '/log', icon: '📝', label: 'Dégueul\'s' },
+        { to: '/log', icon: '📝', label: 'Rap\'ser' },
         { to: '/classement', icon: '🏆', label: 'Gradante' },
       ]
     : [
-        { to: '/dashboard', icon: '🏠', label: 'Mon Score' },
+        { to: '/dashboard', icon: '🏠', label: 'Mes PC' },
         { to: '/classement', icon: '🏆', label: 'Gradante' },
       ]
 

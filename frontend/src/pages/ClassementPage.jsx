@@ -36,7 +36,7 @@ export default function ClassementPage() {
 
   return (
     <div className="page animate-in">
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Gradante</h2>
+      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>📊 Gradante</h2>
 
       {/* Tabs */}
       <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: '20px' }}>
@@ -44,13 +44,13 @@ export default function ClassementPage() {
           style={{ flex: 1, background: 'none', border: 'none', padding: '12px', color: tab === 'indiv' ? 'var(--accent)' : 'var(--text-muted)', borderBottom: tab === 'indiv' ? '2px solid var(--accent)' : '2px solid transparent', fontWeight: tab === 'indiv' ? 'bold' : 'normal', cursor: 'pointer', transition: 'var(--transition)' }}
           onClick={() => setTab('indiv')}
         >
-          Individuel
+          Gadz individuel
         </button>
         <button 
           style={{ flex: 1, background: 'none', border: 'none', padding: '12px', color: tab === 'fams' ? 'var(--accent)' : 'var(--text-muted)', borderBottom: tab === 'fams' ? '2px solid var(--accent)' : '2px solid transparent', fontWeight: tab === 'fams' ? 'bold' : 'normal', cursor: 'pointer', transition: 'var(--transition)' }}
           onClick={() => setTab('fams')}
         >
-          Fam's (Moy's)
+          Fam's (Moyenne)
         </button>
       </div>
 
@@ -92,11 +92,11 @@ export default function ClassementPage() {
                     <div className="name" style={{ flex: 1, marginLeft: '8px' }}>
                       <span style={{ fontWeight: isMyFams ? 'bold' : '500' }}>Pa² {fam.ancien_buque || fam.ancien_nom}</span>
                       {fam.numero_fams && <small>Num's: {fam.numero_fams}</small>}
-                      <small>{fam.nb_membres} fillot(s)</small>
+                      <small>{fam.nb_membres} tiot(s) de Fam's</small>
                     </div>
                     <div className="pts" style={{ textAlign: 'right' }}>
                       <div style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{Math.round(fam.moyenne_points * 10) / 10} PC</div>
-                      <small style={{ color: 'var(--text-muted)' }}>Moy's</small>
+                      <small style={{ color: 'var(--text-muted)' }}>Moyenne PC</small>
                     </div>
                   </div>
                 )

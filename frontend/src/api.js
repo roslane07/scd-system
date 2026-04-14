@@ -29,7 +29,7 @@ async function apiFetch(endpoint, options = {}) {
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data.detail || 'Erreur serveur');
+    throw new Error(data.detail || "Bousin du tabagn's — réessaie cop's");
   }
 
   return data;
