@@ -102,7 +102,7 @@ export default function SetupPage() {
                 className="input" 
                 value={email} 
                 onChange={(e) => setEmail(e.target.value)} 
-                placeholder="ton.email@gadz.org"
+                placeholder="ton.email@exemple.com"
               />
             </div>
             <div className="input-group">
