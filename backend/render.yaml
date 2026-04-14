@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: scd-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: SCD_JWT_SECRET
+        generateValue: true
+      - key: SCD_DATABASE_PATH
+        value: /data/scd.db
+      - key: SCD_RODAGE_ACTIF
+        value: "true"
+    disk:
+      name: scd-data
+      mountPath: /data
+      sizeGB: 1
