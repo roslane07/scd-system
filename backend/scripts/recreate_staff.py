@@ -19,6 +19,8 @@ STAFF = [
     ('hafsa', 'essayhi', 'T’ila', '10', 'ANCIEN'),
     ('nabil', 'kardad', 'DenLotus', '5', 'ANCIEN'),
     ('fatima ezzahrae', 'aziz', 'Ta(z)°i(z)°illy', '16', 'ANCIEN'),
+    ('mouhcine', 'mrizik', None, None, 'ANCIEN'),
+    ('aymane', 'khodra', None, None, 'ANCIEN'),
 ]
 
 added = 0
