@@ -82,25 +82,22 @@ export default function ClassementPage() {
 
           {tab === 'fams' && (
             <div>
-              {classementFams.map((fam, index) => {
-                const isMyFams = fam.membres.some(m => m.id === user?.id)
-                return (
-                  <div key={fam.ancien_nom || index} className={`list-item ${isMyFams ? 'card' : ''}`} style={{ background: isMyFams ? 'var(--bg-card-hover)' : 'var(--bg-card)', borderColor: isMyFams ? 'var(--accent-light)' : 'var(--border)' }}>
-                    <div style={{ width: '32px', textAlign: 'center', fontWeight: 'bold', fontSize: '1.1rem' }}>
-                      {getRankMedal(fam.rang)}
-                    </div>
-                    <div className="name" style={{ flex: 1, marginLeft: '8px' }}>
-                      <span style={{ fontWeight: isMyFams ? 'bold' : '500' }}>Pa² {fam.ancien_buque || fam.ancien_nom}</span>
-                      {fam.numero_fams && <small>Num's: {fam.numero_fams}</small>}
-                      <small>{fam.nb_membres} tiot(s) de Fam's</small>
-                    </div>
-                    <div className="pts" style={{ textAlign: 'right' }}>
-                      <div style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{Math.round(fam.moyenne_points * 10) / 10} PC</div>
-                      <small style={{ color: 'var(--text-muted)' }}>Moyenne PC</small>
-                    </div>
+              {classementFams.map((fam, index) => (
+                <div key={fam.pa2 || index} className="list-item" style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
+                  <div style={{ width: '32px', textAlign: 'center', fontWeight: 'bold', fontSize: '1.1rem' }}>
+                    {getRankMedal(fam.rang)}
                   </div>
-                )
-              })}
+                  <div className="name" style={{ flex: 1, marginLeft: '8px' }}>
+                    <span style={{ fontWeight: 500 }}>Pa² {fam.pa2}</span>
+                    {fam.numero_fams && <small>Num's: {fam.numero_fams}</small>}
+                    <small>{fam.nb_membres} tiot(s) de Fam's</small>
+                  </div>
+                  <div className="pts" style={{ textAlign: 'right' }}>
+                    <div style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{Math.round((fam.score_moyen || 0) * 10) / 10} PC</div>
+                    <small style={{ color: 'var(--text-muted)' }}>Moyenne PC</small>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
