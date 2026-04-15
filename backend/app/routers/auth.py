@@ -76,6 +76,8 @@ class SetupRequest(BaseModel):
     buque: Optional[str] = None
     numero_fams: Optional[str] = None
     parent_id: Optional[int] = None
+    pa2_numero_fams: Optional[str] = None
+    p3_numero_fams: Optional[str] = None
 
 
 # ══════════════════════════════════════════════════════════════
@@ -282,7 +284,7 @@ def onboarding_setup(body: SetupRequest, user: Personne = Depends(get_current_us
     if body.numero_fams:
         user.numero_fams = body.numero_fams
 
-    # Update parent_id (pa²)
+    # Update parent_id (pa²) - obligatoire
     if body.parent_id:
         try:
             parent = Personne.get_by_id(body.parent_id)
@@ -292,6 +294,22 @@ def onboarding_setup(body: SetupRequest, user: Personne = Depends(get_current_us
                     detail="Le pa² doit être un Ancien ou P3",
                 )
             user.parent_id = body.parent_id
+
+            # Update pa²'s numero_fams if provided and not already set
+            if body.pa2_numero_fams and not parent.numero_fams:
+                parent.numero_fams = body.pa2_numero_fams
+                parent.save()
+
+            # Update P3's numero_fams if provided and not already set
+            if body.p3_numero_fams and parent.parent_id:
+                try:
+                    p3 = Personne.get_by_id(parent.parent_id)
+                    if not p3.numero_fams:
+                        p3.numero_fams = body.p3_numero_fams
+                        p3.save()
+                except Personne.DoesNotExist:
+                    pass
+
         except Personne.DoesNotExist:
             raise HTTPException(status_code=404, detail="Pa² introuvable")
 
