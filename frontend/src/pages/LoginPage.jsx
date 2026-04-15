@@ -90,7 +90,7 @@ export default function LoginPage() {
           </button>
 
           <div style={{ textAlign: 'center', marginTop: '24px' }}>
-            <Link to="/forgot" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Mot de passe oublié ?</Link>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Mot de passe oublié ? Contacte l'admin.</span>
           </div>
         </form>
       </div>
