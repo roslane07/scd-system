@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { apiFetch } from '../api'
+import { getConscrit, getHistorique } from '../api'
 
 export default function ProfilePage() {
   const { id } = useParams()
@@ -14,11 +14,11 @@ export default function ProfilePage() {
   useEffect(() => {
     async function loadProfile() {
       try {
-        const data = await apiFetch(`/conscrits/${id}`)
+        const data = await getConscrit(id)
         setProfile(data)
         
         // Load history
-        const histData = await apiFetch(`/conscrits/${id}/historique`)
+        const histData = await getHistorique(id)
         setHistory(histData)
       } catch (err) {
         setError(err.message || 'Impossible de charger le profil')
