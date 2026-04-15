@@ -9,7 +9,7 @@
 
 const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
-async function apiFetch(endpoint, options = {}) {
+export async function apiFetch(endpoint, options = {}) {
   const token = localStorage.getItem('scd_token');
   const headers = {
     'Content-Type': 'application/json',
