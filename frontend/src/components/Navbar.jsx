@@ -9,7 +9,6 @@ export default function Navbar() {
   const items = isAncien
     ? [
         { to: '/dashboard', icon: '🏠', label: 'Accueil' },
-        { to: '/log', icon: '📝', label: 'Logger' },
         { to: '/classement', icon: '🏆', label: 'Classement' },
       ]
     : [

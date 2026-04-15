@@ -79,9 +79,15 @@ export default function DashboardAncien() {
               )
             })}
           </div>
+          <button 
+            className="btn btn-primary btn-lg btn-block glow-pulse" 
+            onClick={() => navigate('/log')}
+            style={{ marginBottom: '32px' }}
+          >
+            📝 Signaler une infraction
+          </button>
 
 
-          <section>
             <h3 style={{ marginBottom: '12px', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
               ⚠️ En danger <span style={{ fontSize: '0.8rem', background: 'var(--bg-secondary)', padding: '2px 8px', borderRadius: '10px' }}>{danger.length}</span>
             </h3>
