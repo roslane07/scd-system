@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getClassementIndividuel, getClassementFams, getUser, getZoneClass, getZoneEmoji } from "../apiClient"
+import { getClassementIndividuel, getClassementFams, getUser, getZoneClass, getZoneEmoji } from "../api"
 import Navbar from '../components/Navbar'
 
 export default function ClassementPage() {
-  const [tab, setTab] = useState('indiv') // 'indiv' | 'fams'
+  const [tab, setTab] = useState('indiv') //  indiv  |  fams 
   const [classementIndiv, setClassementIndiv] = useState([])
   const [classementFams, setClassementFams] = useState([])
   const [isLoading, setIsLoading] = useState(true)

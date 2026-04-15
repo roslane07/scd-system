@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getConscrits, getUser, logout, getZoneClass, getZoneEmoji, getZoneLabel } from "../apiClient"
+import { getConscrits, getUser, logout, getZoneClass, getZoneEmoji, getZoneLabel } from "../api"
 import Navbar from '../components/Navbar'
 
 export default function DashboardAncien() {
@@ -35,8 +35,8 @@ export default function DashboardAncien() {
   const danger = conscrits.filter(c => ['ZONE_ORANGE', 'ZONE_ROUGE', 'ZONE_NOIRE'].includes(c.zone))
 
   // Timeline (extract logs from all conscrits - just a fake timeline for now, or actual if easy)
-  // Actually, the API doesn't have a global "last logs" endpoint for Anciens, but we can just
-  // map some data or leave it as "En danger" only. Let's list the danger ones.
+  // Actually, the API doesn t have a global "last logs" endpoint for Anciens, but we can just
+  // map some data or leave it as "En danger" only. Let s list the danger ones.
 
   const displayName = user?.buque || user?.prenom || 'Ancien'
 

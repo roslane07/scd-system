@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { getUser } from "../apiClient"
+import { getUser } from "../api"
 
 export default function Navbar() {
   const loc = useLocation()

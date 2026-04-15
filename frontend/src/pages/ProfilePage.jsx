@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { getConscrit, getHistorique, getFam, getZoneClass, getZoneEmoji } from "../apiClient"
+import { getConscrit, getHistorique, getFam, getZoneClass, getZoneEmoji } from "../api"
 
 export default function ProfilePage() {
   const { id } = useParams()
@@ -96,7 +96,7 @@ export default function ProfilePage() {
       {/* Family Tree */}
       {(profile.p3_nom || profile.pa2_nom || siblings.length > 0) && (
         <div className="card" style={{ marginBottom: '20px' }}>
-          <h3 style={{ fontSize: '1rem', marginBottom: '16px', color: 'var(--text-secondary)' }}>🌳 Arbre Gadz'Art</h3>
+          <h3 style={{ fontSize: '1rem', marginBottom: '16px', color: 'var(--text-secondary)' }}>🌳 Arbre GadzArt</h3>
 
           {/* P3 / Fam's Racine */}
           {profile.p3_nom && (

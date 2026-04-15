@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { login, saveAuth } from "../apiClient"
+import { login, saveAuth } from "../api"
 
 export default function LoginPage() {
   const [identifier, setIdentifier] = useState('')
@@ -19,7 +19,7 @@ export default function LoginPage() {
       // First try to login by email/nom. The backend endpoint takes either `nom` or `email` as well as `password`.
       // We will blindly send the identifier as both nom and email and let the backend figure it out.
       // Wait, the backend in auth.py takes: { nom?: str, email?: str, password: str }
-      // We can interpret the identifier: if it contains @, it's an email, otherwise it's a nom.
+      // We can interpret the identifier: if it contains @, it s an email, otherwise it s a nom.
       const isEmail = identifier.includes('@')
       const data = await login(
         isEmail ? null : identifier,
@@ -90,7 +90,7 @@ export default function LoginPage() {
           </button>
 
           <div style={{ textAlign: 'center', marginTop: '24px' }}>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Mot de passe oublié ? Contacte l'admin.</span>
+            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Mot de passe oublié ? Contacte l admin.</span>
           </div>
         </form>
       </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { resetPassword } from "../apiClient"
+import { resetPassword } from "../api"
 
 export default function ResetPasswordPage() {
   const [searchParams] = useSearchParams()
@@ -14,7 +14,7 @@ export default function ResetPasswordPage() {
   const [errorMsg, setErrorMsg] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  // S'il n'y a pas de token dans l'URL
+  // S il n y a pas de token dans l URL
   useEffect(() => {
     if (!token) {
       setErrorMsg("Lien invalide ou expiré.")

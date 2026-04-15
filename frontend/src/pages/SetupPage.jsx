@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { setupProfile, getAnciensList, getUser } from "../apiClient"
+import { setupProfile, getAnciensList, getUser } from "../api"
 
 export default function SetupPage() {
   const navigate = useNavigate()
@@ -137,7 +137,7 @@ export default function SetupPage() {
         {/* STEP 2: IDENTITÉ */}
         {step === 2 && (
           <div className="animate-in">
-            <h3 style={{ marginBottom: '8px' }}>Étape 2 : Identité Gadz'Art</h3>
+            <h3 style={{ marginBottom: '8px' }}>Étape 2 : Identité GadzArt</h3>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '20px' }}>
               Renseigne ta bucque et ton numéro de Fam's.
             </p>
