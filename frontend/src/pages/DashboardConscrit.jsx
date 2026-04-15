@@ -8,8 +8,15 @@ export default function DashboardConscrit() {
   const [logs, setLogs] = useState([])
   const [restrictions, setRestrictions] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
+    if (!user?.id) {
+      setError('Utilisateur non identifié')
+      setIsLoading(false)
+      return
+    }
+    
     Promise.all([
       getConscrit(user.id),
       getHistorique(user.id),
@@ -20,12 +27,37 @@ export default function DashboardConscrit() {
       setLogs(lData)
       setRestrictions(rData)
     })
-    .catch(console.error)
+    .catch((err) => {
+      console.error('Dashboard load error:', err)
+      setError(err.message || 'Erreur de connexion au serveur')
+    })
     .finally(() => setIsLoading(false))
-  }, [user.id])
+  }, [user?.id])
 
   if (isLoading) return <div className="page-center"><div className="spinner"></div></div>
-  if (!profil) return <div className="page-center">Erreur de chargement</div>
+  if (error) return (
+    <div className="page-center" style={{ textAlign: 'center', padding: '20px' }}>
+      <div style={{ color: 'var(--danger)', marginBottom: '16px', fontSize: '1.1rem' }}>⚠️ {error}</div>
+      <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '24px' }}>
+        User ID: {user?.id || 'non défini'}<br/>
+        Role: {user?.role || 'non défini'}
+      </div>
+      <button className="btn btn-primary" onClick={() => window.location.reload()}>
+        Réessayer
+      </button>
+      <button className="btn btn-ghost" onClick={logout} style={{ marginLeft: '12px' }}>
+        Déconnexion
+      </button>
+    </div>
+  )
+  if (!profil) return (
+    <div className="page-center" style={{ textAlign: 'center', padding: '20px' }}>
+      <div style={{ color: 'var(--danger)', marginBottom: '16px' }}>Profil non trouvé</div>
+      <button className="btn btn-ghost" onClick={logout}>
+        Retour à la connexion
+      </button>
+    </div>
+  )
 
   const zoneClass = getZoneClass(profil.zone)
   const zoneEmoji = getZoneEmoji(profil.zone)
