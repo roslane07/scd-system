@@ -7,7 +7,7 @@
  *   - Returns parsed JSON
  */
 
-const API_BASE = import.meta.env.VITE_API_URL || '/api';
+const API_BASE = 'https://scd-api-roslan.fly.dev/api';
 
 export async function apiFetch(endpoint, options = {}) {
   const token = localStorage.getItem('scd_token');
