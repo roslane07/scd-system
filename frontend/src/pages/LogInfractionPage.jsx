@@ -79,7 +79,7 @@ export default function LogInfractionPage() {
           <input 
             type="text" 
             className="input" 
-            placeholder="Fouiner par nom, bucque, pat's..." 
+            placeholder="Rechercher nom, bucque..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             autoFocus
@@ -153,20 +153,20 @@ export default function LogInfractionPage() {
       <div className="page-center animate-in">
         
         {success && (
-          <div className="toast-container"><div className="toast success">Dégueul's rap'sée, trad'ssement. ✅</div></div>
+          <div className="toast-container"><div className="toast success">Infraction enregistrée ✅</div></div>
         )}
         {error && (
           <div className="toast-container"><div className="toast error">{error}</div></div>
         )}
 
         <div className="card" style={{ width: '100%', maxWidth: '360px' }}>
-          <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>Torche-la cette dégueul's ?</h2>
+          <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>Confirmer l'infraction</h2>
           
           <div style={{ background: 'var(--bg-secondary)', padding: '16px', borderRadius: 'var(--radius-sm)', marginBottom: '16px' }}>
             <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Gadz visé</div>
             <div style={{ fontWeight: 600, marginBottom: '12px' }}>{selectedConscrit.nom} {selectedConscrit.prenom}</div>
             
-            <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Dégueul's</div>
+            <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Infraction</div>
             <div style={{ fontWeight: 600 }}>{selectedInfraction.code} — {selectedInfraction.nom}</div>
             <div style={{ color: selectedInfraction.points < 0 ? 'var(--danger)' : 'var(--success)', fontWeight: 'bold', fontSize: '1.2rem', margin: '4px 0' }}>
               {selectedInfraction.points > 0 ? '+' : ''}{selectedInfraction.points} points
@@ -191,10 +191,10 @@ export default function LogInfractionPage() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '24px' }}>
             <button className="btn btn-primary btn-lg" onClick={handleConfirm} disabled={isSubmitting}>
-              {isSubmitting ? <span className="spinner" style={{ width: '20px', height: '20px', borderWidth: '2px' }}/> : "✅ POILSER"}
+              {isSubmitting ? <span className="spinner" style={{ width: '20px', height: '20px', borderWidth: '2px' }}/> : "✅ CONFIRMER"}
             </button>
             <button className="btn btn-ghost" onClick={() => setStep(2)} disabled={isSubmitting}>
-              ❌ Efcer
+              ❌ Annuler
             </button>
           </div>
         </div>

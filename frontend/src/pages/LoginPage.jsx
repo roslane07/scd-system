@@ -35,7 +35,7 @@ export default function LoginPage() {
         navigate('/dashboard')
       }
     } catch (err) {
-      setError(err.message || "Babill's ou mot d'axe dézoné — vérifie cop's")
+      setError(err.message || "Identifiants incorrects")
     } finally {
       setIsLoading(false)
     }
@@ -52,7 +52,7 @@ export default function LoginPage() {
       <div className="card-glass" style={{ width: '100%', maxWidth: '360px' }}>
         <form onSubmit={handleLogin}>
           <div className="input-group">
-            <label>Nom ou Babill's</label>
+            <label>Nom ou Email</label>
             <input 
               type="text" 
               className="input" 
@@ -66,7 +66,7 @@ export default function LoginPage() {
           </div>
 
           <div className="input-group">
-            <label>Mot d'axe</label>
+            <label>Mot de passe</label>
             <div style={{ position: 'relative' }}>
               <input 
                 type={showPwd ? 'text' : 'password'} 
@@ -86,11 +86,11 @@ export default function LoginPage() {
           {error && <div style={{ color: 'var(--danger)', fontSize: '0.85rem', marginBottom: '16px', textAlign: 'center' }}>{error}</div>}
 
           <button type="submit" className="btn btn-primary btn-block" disabled={isLoading} style={{ marginTop: '8px' }}>
-            {isLoading ? <div className="spinner" style={{ width: '18px', height: '18px', borderWidth: '2px' }}></div> : "S'axer"}
+            {isLoading ? <div className="spinner" style={{ width: '18px', height: '18px', borderWidth: '2px' }}></div> : "Se connecter"}
           </button>
 
           <div style={{ textAlign: 'center', marginTop: '24px' }}>
-            <Link to="/forgot" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Mot d'axe oublié ?</Link>
+            <Link to="/forgot" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textDecoration: 'none' }}>Mot de passe oublié ?</Link>
           </div>
         </form>
       </div>
