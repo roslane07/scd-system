@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { login, saveAuth } from '../api'
+import { login, saveAuth } from '../apiClient'
 
 export default function LoginPage() {
   const [identifier, setIdentifier] = useState('')

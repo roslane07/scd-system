@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getConscrits, getInfractionTypes, applyInfraction, getZoneClass, getZoneEmoji } from '../api'
+import { getConscrits, getInfractionTypes, applyInfraction, getZoneClass, getZoneEmoji } from '../apiClient'
 
 export default function LogInfractionPage() {
   const navigate = useNavigate()
