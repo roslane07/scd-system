@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getConscrits, getUser, logout, getZoneClass, getZoneEmoji, getZoneLabel } from "../api"
+import { getConscrits, getUser, logout, getZoneClass, getZoneEmoji, getZoneLabel } from '../api'
 import Navbar from '../components/Navbar'
 
 export default function DashboardAncien() {
@@ -87,7 +87,7 @@ export default function DashboardAncien() {
             📝 Signaler une infraction
           </button>
 
-
+          <section>
             <h3 style={{ marginBottom: '12px', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
               ⚠️ En danger <span style={{ fontSize: '0.8rem', background: 'var(--bg-secondary)', padding: '2px 8px', borderRadius: '10px' }}>{danger.length}</span>
             </h3>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getConscrit, getHistorique, getRestrictions, getUser, logout, getZoneClass, getZoneEmoji, getZoneLabel } from "../api"
+import { getConscrit, getHistorique, getRestrictions, getUser, logout, getZoneClass, getZoneEmoji, getZoneLabel } from '../api'
 import Navbar from '../components/Navbar'
 
 export default function DashboardConscrit() {
