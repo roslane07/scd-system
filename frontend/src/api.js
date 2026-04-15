@@ -70,6 +70,12 @@ export const setupProfile = (data) =>
 
 export const getAnciensList = () => apiFetch('/auth/anciens-list');
 
+export const updateProfile = (data) =>
+  apiFetch('/auth/profile', {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  });
+
 // ── Conscrits ────────────────────────────────────────────
 export const getConscrits = () => apiFetch('/conscrits/');
 export const getConscritsByZone = (zone) => apiFetch(`/conscrits/zone/${zone}`);

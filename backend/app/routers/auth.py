@@ -80,6 +80,12 @@ class SetupRequest(BaseModel):
     p3_numero_fams: Optional[str] = None
 
 
+class ProfileUpdateRequest(BaseModel):
+    email: Optional[str] = None
+    buque: Optional[str] = None
+    numero_fams: Optional[str] = None
+
+
 # ══════════════════════════════════════════════════════════════
 #  ENDPOINTS
 # ══════════════════════════════════════════════════════════════
@@ -147,6 +153,61 @@ def change_password(body: PasswordChangeRequest, user: Personne = Depends(get_cu
     user.password_hash = hash_password(body.new_password)
     user.save()
     return {"status": "ok", "message": "Mot de passe modifié"}
+
+
+@router.patch("/profile")
+def update_profile(body: ProfileUpdateRequest, user: Personne = Depends(get_current_user)):
+    """
+    Update own profile (email, buque, numero_fams).
+    Cannot change nom/prenom.
+    """
+    updated = []
+
+    if body.email is not None:
+        # Check uniqueness
+        existing = (
+            Personne.select()
+            .where(Personne.email == body.email, Personne.id != user.id)
+            .first()
+        )
+        if existing:
+            raise HTTPException(
+                status_code=409,
+                detail=f"Email '{body.email}' déjà utilisé",
+            )
+        user.email = body.email
+        updated.append("email")
+
+    if body.buque is not None:
+        # Check uniqueness if not empty
+        if body.buque.strip():
+            existing = (
+                Personne.select()
+                .where(Personne.buque == body.buque, Personne.id != user.id)
+                .first()
+            )
+            if existing:
+                raise HTTPException(
+                    status_code=409,
+                    detail=f"Buque '{body.buque}' déjà utilisée",
+                )
+        user.buque = body.buque if body.buque.strip() else None
+        updated.append("buque")
+
+    if body.numero_fams is not None:
+        user.numero_fams = body.numero_fams if body.numero_fams.strip() else None
+        updated.append("numero_fams")
+
+    user.save()
+
+    return {
+        "status": "ok",
+        "message": "Profil mis à jour",
+        "updated_fields": updated,
+        "email": user.email,
+        "buque": user.buque,
+        "numero_fams": user.numero_fams,
+    }
 
 
 # async email sending task
