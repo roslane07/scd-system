@@ -49,8 +49,12 @@ class PersonneOut(BaseModel):
 
 class PersonneDetail(PersonneOut):
     """Extended view with pa² info and timestamps."""
+    pa2_id: Optional[int] = None
     pa2_nom: Optional[str] = None
     pa2_buque: Optional[str] = None
+    p3_id: Optional[int] = None
+    p3_nom: Optional[str] = None
+    p3_buque: Optional[str] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 

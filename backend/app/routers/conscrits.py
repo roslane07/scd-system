@@ -64,18 +64,32 @@ def get_conscrit(conscrit_id: int, user: Personne = Depends(get_current_user)):
 
     data = _personne_to_dict(conscrit)
 
-    # Add pa² info
+    # Add pa² info and p3 info
+    data["pa2_id"] = None
+    data["pa2_nom"] = None
+    data["pa2_buque"] = None
+    data["p3_id"] = None
+    data["p3_nom"] = None
+    data["p3_buque"] = None
+
     if conscrit.parent_id:
         try:
             pa2 = Personne.get_by_id(conscrit.parent_id)
+            data["pa2_id"] = pa2.id
             data["pa2_nom"] = f"{pa2.prenom} {pa2.nom}"
             data["pa2_buque"] = pa2.buque
+            
+            # Fetch P3 (pa3/racine) if exists
+            if pa2.parent_id:
+                try:
+                    p3 = Personne.get_by_id(pa2.parent_id)
+                    data["p3_id"] = p3.id
+                    data["p3_nom"] = f"{p3.prenom} {p3.nom}"
+                    data["p3_buque"] = p3.buque
+                except Personne.DoesNotExist:
+                    pass
         except Personne.DoesNotExist:
-            data["pa2_nom"] = None
-            data["pa2_buque"] = None
-    else:
-        data["pa2_nom"] = None
-        data["pa2_buque"] = None
+            pass
 
     data["created_at"] = conscrit.created_at
     data["updated_at"] = conscrit.updated_at
