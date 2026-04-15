@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { setupProfile, getAnciensList, getUser } from '../apiClient'
+import { setupProfile, getAnciensList, getUser } from "../apiClient"
 
 export default function SetupPage() {
   const navigate = useNavigate()

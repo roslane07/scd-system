@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { getUser } from './apiClient'
+import { getUser } from "./apiClient"
 import LoginPage from './pages/LoginPage'
 import SetupPage from './pages/SetupPage'
 import DashboardAncien from './pages/DashboardAncien'

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getConscrits, getUser, logout, getZoneClass, getZoneEmoji, getZoneLabel } from '../apiClient'
+import { getConscrits, getUser, logout, getZoneClass, getZoneEmoji, getZoneLabel } from "../apiClient"
 import Navbar from '../components/Navbar'
 
 export default function DashboardAncien() {

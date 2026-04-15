@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { resetPassword } from '../apiClient'
+import { resetPassword } from "../apiClient"
 
 export default function ResetPasswordPage() {
   const [searchParams] = useSearchParams()

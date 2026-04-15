@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getClassementIndividuel, getClassementFams, getUser, getZoneClass, getZoneEmoji } from '../apiClient'
+import { getClassementIndividuel, getClassementFams, getUser, getZoneClass, getZoneEmoji } from "../apiClient"
 import Navbar from '../components/Navbar'
 
 export default function ClassementPage() {
