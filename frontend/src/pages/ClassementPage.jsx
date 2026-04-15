@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getClassementIndividuel, getClassementFams, getUser, getZoneClass, getZoneEmoji } from '../api'
 import Navbar from '../components/Navbar'
 
@@ -7,6 +8,7 @@ export default function ClassementPage() {
   const [classementIndiv, setClassementIndiv] = useState([])
   const [classementFams, setClassementFams] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const navigate = useNavigate()
   
   const user = getUser()
 
@@ -61,9 +63,14 @@ export default function ClassementPage() {
           {tab === 'indiv' && (
             <div>
               {classementIndiv.map((c, index) => {
-                const isMe = c.conscrit_id === user?.id
+                const isMe = c.id === user?.id
                 return (
-                  <div key={c.conscrit_id} className={`list-item ${isMe ? 'card' : ''}`} style={{ background: isMe ? 'var(--bg-card-hover)' : 'var(--bg-card)', borderColor: isMe ? 'var(--accent-light)' : 'var(--border)' }}>
+                  <div 
+                    key={c.id} 
+                    className={`list-item ${isMe ? 'card' : ''}`} 
+                    style={{ background: isMe ? 'var(--bg-card-hover)' : 'var(--bg-card)', borderColor: isMe ? 'var(--accent-light)' : 'var(--border)', cursor: 'pointer' }}
+                    onClick={() => navigate(`/profil/${c.id}`)}
+                  >
                     <div style={{ width: '32px', textAlign: 'center', fontWeight: 'bold', fontSize: '1.1rem' }}>
                       {getRankMedal(c.rang)}
                     </div>
@@ -72,7 +79,7 @@ export default function ClassementPage() {
                       {c.buque && <small>({c.buque})</small>}
                     </div>
                     <div className="pts" style={{ textAlign: 'right' }}>
-                      <span className={`zone-badge ${getZoneClass(c.zone)}`}>{getZoneEmoji(c.zone)} {c.points} pts</span>
+                      <span className={`zone-badge ${getZoneClass(c.zone)}`}>{getZoneEmoji(c.zone)} {c.points_actuels} pts</span>
                     </div>
                   </div>
                 )

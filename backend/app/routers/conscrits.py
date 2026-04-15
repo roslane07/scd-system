@@ -60,9 +60,7 @@ def get_conscrit(conscrit_id: int, user: Personne = Depends(get_current_user)):
     except Personne.DoesNotExist:
         raise HTTPException(status_code=404, detail="Conscrit introuvable")
 
-    # Access control: conscrits can only see their own profile
-    if user.role == ROLE_CONSCRIT and user.id != conscrit_id:
-        raise HTTPException(status_code=403, detail="Accès non autorisé")
+    # Anyone can view anyone's profile now as requested
 
     data = _personne_to_dict(conscrit)
 

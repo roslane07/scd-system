@@ -8,6 +8,7 @@ import LogInfractionPage from './pages/LogInfractionPage'
 import ClassementPage from './pages/ClassementPage'
 import ForgotPasswordPage from './pages/ForgotPasswordPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
+import ProfilePage from './pages/ProfilePage'
 
 function ProtectedRoute({ children }) {
   const user = getUser()
@@ -37,6 +38,11 @@ function App() {
         <Route path="/classement" element={
           <ProtectedRoute>
             <ClassementPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/profil/:id" element={
+          <ProtectedRoute>
+            <ProfilePage />
           </ProtectedRoute>
         } />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
