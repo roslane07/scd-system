@@ -7,6 +7,7 @@ import DashboardConscrit from './pages/DashboardConscrit'
 import LogInfractionPage from './pages/LogInfractionPage'
 import ClassementPage from './pages/ClassementPage'
 import ForgotPasswordPage from './pages/ForgotPasswordPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 
 function ProtectedRoute({ children }) {
   const user = getUser()
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot" element={<ForgotPasswordPage />} />
+        <Route path="/reset" element={<ResetPasswordPage />} />
         <Route path="/setup" element={<SetupPage />} />
         <Route path="/dashboard" element={
           <ProtectedRoute>

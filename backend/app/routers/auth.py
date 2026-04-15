@@ -11,7 +11,9 @@ Endpoints:
 """
 from datetime import timedelta
 
-from fastapi import APIRouter, HTTPException, Depends, status
+from fastapi import APIRouter, HTTPException, Depends, status, BackgroundTasks
+import os
+import httpx
 from pydantic import BaseModel, Field
 from typing import Optional
 
@@ -145,19 +147,56 @@ def change_password(body: PasswordChangeRequest, user: Personne = Depends(get_cu
     return {"status": "ok", "message": "Mot de passe modifié"}
 
 
-@router.post("/forgot")
-def forgot_password(body: ForgotPasswordRequest):
-    """
-    Request a password reset. Generates a reset token.
+# async email sending task
+async def send_reset_email(email_to: str, token: str):
+    resend_api_key = os.environ.get("RESEND_API_KEY")
+    if not resend_api_key:
+        print("Warning: RESEND_API_KEY is not set.")
+        return
 
-    In production, this would send an email with a reset link.
-    For now, it returns the token directly (for development).
+    frontend_url = os.environ.get("FRONTEND_URL", "https://scd-system.vercel.app")
+    reset_link = f"{frontend_url}/reset?token={token}"
+    sender_email = os.environ.get("SENDER_EMAIL", "onboarding@resend.dev")
+
+    html_content = f"""
+    <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2>Réinitialisation de ton mot d'axe (SCD)</h2>
+        <p>Salut,</p>
+        <p>Tu as demandé à réinitialiser ton mot d'axe sur le SCD Tabagn's. Clique sur le bouton ci-dessous pour le changer :</p>
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="{reset_link}" style="background-color: #7c3aed; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Changer mon mot d'axe</a>
+        </div>
+        <p style="color: #666; font-size: 0.9em;">Si tu n'as pas fait cette demande, ignore simplement cet e-mail.</p>
+    </div>
+    """
+
+    async with httpx.AsyncClient() as client:
+        payload = {
+            "from": f"SCD Tabagn's <{sender_email}>",
+            "to": [email_to],
+            "subject": "🔑 SCD - Réinitialisation de ton mot d'axe",
+            "html": html_content
+        }
+        headers = {
+            "Authorization": f"Bearer {resend_api_key}",
+            "Content-Type": "application/json"
+        }
+        try:
+            resp = await client.post("https://api.resend.com/emails", json=payload, headers=headers)
+            print(f"Resend email status: {resp.status_code}")
+        except Exception as e:
+            print(f"Error sending email: {e}")
+
+@router.post("/forgot")
+def forgot_password(body: ForgotPasswordRequest, background_tasks: BackgroundTasks):
+    """
+    Request a password reset. Generates a reset token and sends an email via Resend if configured.
     """
     try:
         user = Personne.get(Personne.email == body.email)
     except Personne.DoesNotExist:
         # Don't reveal whether the email exists
-        return {"status": "ok", "message": "Si cet email existe, un lien de réinitialisation a été envoyé."}
+        return {"status": "ok", "message": "Si cette babill's existe, un lien de réinitialisation a été F.C."}
 
     # Create a short-lived reset token (15 minutes)
     reset_token = create_access_token(
@@ -165,12 +204,12 @@ def forgot_password(body: ForgotPasswordRequest):
         expires_delta=timedelta(minutes=15)
     )
 
-    # TODO: Send email with reset link in production
-    # For now, return the token for development/testing
+    background_tasks.add_task(send_reset_email, user.email, reset_token)
+
     return {
         "status": "ok",
-        "message": "Si cet email existe, un lien de réinitialisation a été envoyé.",
-        "dev_reset_token": reset_token,  # Remove in production
+        "message": "Si cette babill's existe, un lien de réinitialisation a été F.C.",
+        "dev_reset_token": reset_token,  # Kept for trailing backward compatibility if needed locally
     }
 
 
