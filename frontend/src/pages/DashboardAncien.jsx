@@ -59,7 +59,7 @@ export default function DashboardAncien() {
           <div className="spinner"></div>
         </div>
       ) : (
-        <>
+        <div>
           {/* Summary cards scrollable */}
           <div style={{ display: 'flex', gap: '12px', overflowX: 'auto', paddingBottom: '16px', marginBottom: '16px', margin: '0 -16px', padding: '0 16px 16px 16px' }}>
             {Object.entries(parZone).map(([zone, count]) => {
@@ -111,7 +111,7 @@ export default function DashboardAncien() {
               </div>
             )}
           </section>
-        </>
+        </div>
       )}
 
       <Navbar />
