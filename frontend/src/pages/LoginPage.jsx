@@ -44,7 +44,7 @@ export default function LoginPage() {
   return (
     <div className="page-center animate-in">
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <img src="/am-icon.png" alt="AM" style={{ width: '100px', height: 'auto', marginBottom: '16px', opacity: 0.95 }} />
+        <img src="/am-logo.png" alt="AM" style={{ width: '120px', height: 'auto', marginBottom: '16px', opacity: 0.95 }} />
         <h1 style={{ background: 'var(--accent-gradient)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '3rem', fontWeight: 900, marginBottom: '8px', letterSpacing: '-1px' }}>SCD</h1>
         <p style={{ color: 'var(--text-secondary)' }}>Système de Cohésion & Discipline</p>
       </div>

@@ -15,10 +15,10 @@
   --zone-orange-glow: rgba(249, 115, 22, 0.3);
   --zone-rouge: #ef4444;
   --zone-rouge-bg: rgba(239, 68, 68, 0.12);
-  --zone-rouge-glow: rgba(239, 68, 68, 0.3);
+  --zone-rouge-glow: rgba(239, 68, 68, 0.4);
   --zone-noire: #1e1e1e;
-  --zone-noire-bg: rgba(0, 0, 0, 0.4);
-  --zone-noire-glow: rgba(255, 255, 255, 0.05);
+  --zone-noire-bg: rgba(0, 0, 0, 0.6);
+  --zone-noire-glow: rgba(255, 255, 255, 0.1);
 
   /* ── UI ── */
   --bg-primary: #06060c;
@@ -258,11 +258,23 @@ select.input {
   letter-spacing: 0.5px;
 }
 
-.zone-badge.verte { background: var(--zone-verte-bg); color: var(--zone-verte); }
-.zone-badge.jaune { background: var(--zone-jaune-bg); color: var(--zone-jaune); }
-.zone-badge.orange { background: var(--zone-orange-bg); color: var(--zone-orange); }
-.zone-badge.rouge { background: var(--zone-rouge-bg); color: var(--zone-rouge); }
-.zone-badge.noire { background: var(--zone-noire-bg); color: #888; }
+.zone-badge.verte { background: var(--zone-verte-bg); color: var(--zone-verte); box-shadow: 0 0 10px var(--zone-verte-glow); }
+.zone-badge.jaune { background: var(--zone-jaune-bg); color: var(--zone-jaune); box-shadow: 0 0 10px var(--zone-jaune-glow); }
+.zone-badge.orange { background: var(--zone-orange-bg); color: var(--zone-orange); box-shadow: 0 0 10px var(--zone-orange-glow); animation: pulse-orange 2s infinite; }
+.zone-badge.rouge { background: var(--zone-rouge-bg); color: var(--zone-rouge); box-shadow: 0 0 15px var(--zone-rouge-glow); animation: pulse-danger 1.5s infinite; }
+.zone-badge.noire { background: var(--zone-noire-bg); color: #888; box-shadow: inset 0 0 10px rgba(0,0,0,0.8); }
+
+@keyframes pulse-orange {
+  0% { box-shadow: 0 0 5px var(--zone-orange-glow); }
+  50% { box-shadow: 0 0 15px var(--zone-orange-glow); }
+  100% { box-shadow: 0 0 5px var(--zone-orange-glow); }
+}
+
+@keyframes pulse-danger {
+  0% { box-shadow: 0 0 5px var(--zone-rouge-glow); transform: scale(1); }
+  50% { box-shadow: 0 0 20px var(--zone-rouge-glow); transform: scale(1.02); }
+  100% { box-shadow: 0 0 5px var(--zone-rouge-glow); transform: scale(1); }
+}
 
 /* ══════════════════════════════════════════════════════════════
    NAVBAR (bottom mobile)
