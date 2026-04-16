@@ -71,8 +71,7 @@ export default function DashboardConscrit() {
 
   return (
     <div className="page animate-in">
-      <header style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', marginBottom: '16px' }}>
-        <button className="btn btn-ghost" onClick={() => navigate('/settings')} style={{ padding: '6px 12px', fontSize: '0.8rem' }}>⚙️ Paramètres</button>
+      <header style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '16px' }}>
         <button className="btn btn-ghost" onClick={logout} style={{ padding: '6px 12px', fontSize: '0.8rem' }}>Déconnexion</button>
       </header>
 

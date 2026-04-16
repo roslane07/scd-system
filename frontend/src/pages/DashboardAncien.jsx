@@ -47,14 +47,9 @@ export default function DashboardAncien() {
           <h2 style={{ fontSize: '1.2rem', margin: 0 }}>Salut {displayName}</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Prêt à vérifier la cohésion ?</p>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <button className="btn btn-ghost" onClick={() => navigate('/settings')} style={{ padding: '8px 12px' }}>
-            ⚙️ Paramètres
-          </button>
-          <button className="btn btn-ghost" onClick={logout} style={{ padding: '8px 12px' }}>
-            Déconnexion
-          </button>
-        </div>
+        <button className="btn btn-ghost" onClick={logout} style={{ padding: '8px 12px' }}>
+          Déconnexion
+        </button>
       </header>
 
       {error ? (
