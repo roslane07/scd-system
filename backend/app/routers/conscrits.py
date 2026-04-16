@@ -74,7 +74,7 @@ def get_conscrit(conscrit_id: int, user: Personne = Depends(get_current_user)):
 
     if conscrit.parent_id:
         try:
-            pa2 = Personne.get_by_id(conscrit.parent_id)
+            pa2 = Personne.get_by_id(conscrit.parent_id.id)
             data["pa2_id"] = pa2.id
             data["pa2_nom"] = f"{pa2.prenom} {pa2.nom}"
             data["pa2_buque"] = pa2.buque
@@ -82,7 +82,7 @@ def get_conscrit(conscrit_id: int, user: Personne = Depends(get_current_user)):
             # Fetch P3 (pa3/racine) if exists
             if pa2.parent_id:
                 try:
-                    p3 = Personne.get_by_id(pa2.parent_id)
+                    p3 = Personne.get_by_id(pa2.parent_id.id)
                     data["p3_id"] = p3.id
                     data["p3_nom"] = f"{p3.prenom} {p3.nom}"
                     data["p3_buque"] = p3.buque
@@ -91,8 +91,15 @@ def get_conscrit(conscrit_id: int, user: Personne = Depends(get_current_user)):
         except Personne.DoesNotExist:
             pass
 
-    data["created_at"] = conscrit.created_at
-    data["updated_at"] = conscrit.updated_at
+    # Convert datetime to ISO format strings for JSON serialization
+    if conscrit.created_at:
+        data["created_at"] = conscrit.created_at.isoformat() if hasattr(conscrit.created_at, 'isoformat') else str(conscrit.created_at)
+    else:
+        data["created_at"] = None
+    if conscrit.updated_at:
+        data["updated_at"] = conscrit.updated_at.isoformat() if hasattr(conscrit.updated_at, 'isoformat') else str(conscrit.updated_at)
+    else:
+        data["updated_at"] = None
 
     return data
 
@@ -296,7 +303,7 @@ def _personne_to_dict(p: Personne) -> dict:
         "buque": p.buque,
         "numero_fams": p.numero_fams,
         "role": p.role,
-        "parent_id": p.parent_id,
+        "parent_id": p.parent_id.id if p.parent_id else None,
         "points_actuels": p.points_actuels,
         "zone": p.zone,
     }

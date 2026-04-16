@@ -55,8 +55,8 @@ class PersonneDetail(PersonneOut):
     p3_id: Optional[int] = None
     p3_nom: Optional[str] = None
     p3_buque: Optional[str] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
+    created_at: Optional[str] = None
+    updated_at: Optional[str] = None
 
 
 class BuqueUpdate(BaseModel):
