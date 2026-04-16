@@ -117,6 +117,8 @@ export default function SettingsPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="ton.email@exemple.com"
+              readOnly={false}
+              disabled={false}
             />
           </div>
 
@@ -128,6 +130,8 @@ export default function SettingsPage() {
               value={buque}
               onChange={(e) => setBuque(e.target.value)}
               placeholder="Ta bucque..."
+              readOnly={false}
+              disabled={false}
             />
           </div>
 
@@ -139,6 +143,8 @@ export default function SettingsPage() {
               value={numeroFams}
               onChange={(e) => setNumeroFams(e.target.value)}
               placeholder="Ex: 36-154..."
+              readOnly={false}
+              disabled={false}
             />
           </div>
 
