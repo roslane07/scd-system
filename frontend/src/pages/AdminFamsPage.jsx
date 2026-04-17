@@ -5,7 +5,8 @@ import Navbar from '../components/Navbar'
 
 export default function AdminFamsPage() {
   const navigate = useNavigate()
-  const user = getUser()
+  const [user, setUser] = useState(null)
+  const [isLoadingUser, setIsLoadingUser] = useState(true)
   
   const [anciens, setAnciens] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -14,14 +15,23 @@ export default function AdminFamsPage() {
   const [editingId, setEditingId] = useState(null)
   const [editValue, setEditValue] = useState('')
 
-  // Check if user is P3
+  // Load user from localStorage
   useEffect(() => {
+    const u = getUser()
+    setUser(u)
+    setIsLoadingUser(false)
+  }, [])
+
+  // Check if user is P3 and load data
+  useEffect(() => {
+    if (isLoadingUser) return
+    
     if (!user || user.role !== 'P3') {
       navigate('/dashboard')
       return
     }
     loadAnciens()
-  }, [user, navigate])
+  }, [user, isLoadingUser, navigate])
 
   const loadAnciens = async () => {
     setIsLoading(true)
@@ -65,6 +75,16 @@ export default function AdminFamsPage() {
   const handleCancel = () => {
     setEditingId(null)
     setEditValue('')
+  }
+
+  if (isLoadingUser) {
+    return (
+      <div className="page animate-in">
+        <div style={{ display: 'flex', justifyContent: 'center', padding: '40px' }}>
+          <div className="spinner"></div>
+        </div>
+      </div>
+    )
   }
 
   if (!user || user.role !== 'P3') {
