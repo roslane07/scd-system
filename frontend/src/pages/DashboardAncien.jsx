@@ -48,6 +48,11 @@ export default function DashboardAncien() {
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>Prêt à vérifier la cohésion ?</p>
         </div>
         <div style={{ display: 'flex', gap: '8px' }}>
+          {user?.role === 'P3' && (
+            <button className="btn btn-ghost" onClick={() => navigate('/admin/fams')} style={{ padding: '8px 12px' }}>
+              🏠 Admin Fam's
+            </button>
+          )}
           <button className="btn btn-ghost" onClick={() => navigate('/settings')} style={{ padding: '8px 12px' }}>
             ⚙️ Paramètres
           </button>

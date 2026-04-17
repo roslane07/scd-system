@@ -44,50 +44,67 @@ def classement_individuel() -> list[dict]:
 
 def classement_fams() -> list[dict]:
     """
-    Get Fam's ranking, grouped by parent_id.
+    Get Fam's ranking, grouped by P3's numero_fams (Fam's racine).
 
-    Each Fam's score = sum of PC of all its conscrits.
-    Conscrits with parent_id=null are grouped as "Sans Fam's".
-    Sorted by numero_fams (family number) ascending.
+    Each Fam's score = sum of PC of all its conscrits under the same P3 root.
+    Conscrits without a P3 chain are grouped as "Sans Fam's".
+    Sorted by P3's numero_fams ascending.
 
     Returns:
-        List of dicts with rang, pa2 info, score_total, nb_membres, score_moyen
+        List of dicts with rang, p3_name, numero_fams, score_total, nb_membres, score_moyen
     """
-    # Query: group conscrits by parent_id, sum points, count members
-    resultats = (
-        Personne.select(
-            Personne.parent_id,
-            fn.SUM(Personne.points_actuels).alias("score_fam"),
-            fn.COUNT(Personne.id).alias("nb_membres"),
-        )
-        .where(Personne.role == ROLE_CONSCRIT)
-        .group_by(Personne.parent_id)
-    )
+    # Get all conscrits
+    conscrits = Personne.select().where(Personne.role == ROLE_CONSCRIT)
 
-    # Collect data first, then sort by numero_fams
-    raw_data = []
-    for row in resultats:
-        if row.parent_id:
+    # Group by P3's numero_fams
+    fams_data = {}
+    for c in conscrits:
+        # Find P3 (root) - climb the parent chain
+        p3 = None
+        current = c
+        visited = set()
+        
+        while current.parent_id and current.id not in visited:
+            visited.add(current.id)
             try:
-                pa2 = Personne.get_by_id(row.parent_id)
-                label = pa2.buque or f"{pa2.prenom} {pa2.nom}"
-                numero = pa2.numero_fams or "—"
+                parent = Personne.get_by_id(current.parent_id)
+                # Check if this parent is a P3 (no parent or role=P3)
+                if parent.role == 'P3' or not parent.parent_id:
+                    p3 = parent
+                    break
+                current = parent
             except Personne.DoesNotExist:
-                label = "Pa² inconnu"
-                numero = "—"
+                break
+        
+        # Determine family key and name
+        if p3:
+            fam_key = p3.numero_fams or f"p3_{p3.id}"
+            fam_name = p3.buque or f"{p3.prenom} {p3.nom}"
+            fam_numero = p3.numero_fams or "—"
         else:
-            label = "Sans Fam's (usins en cours)"
-            numero = "—"
-
-        nb = row.nb_membres
-        score = row.score_fam or 0
-        raw_data.append({
-            "pa2": label,
-            "numero_fams": numero,
-            "score_total": score,
-            "nb_membres": nb,
-            "score_moyen": round(score / nb, 1) if nb > 0 else 0,
-        })
+            fam_key = "sans_fams"
+            fam_name = "Sans Fam's (usins en cours)"
+            fam_numero = "—"
+        
+        # Aggregate data
+        if fam_key not in fams_data:
+            fams_data[fam_key] = {
+                "pa2": fam_name,
+                "numero_fams": fam_numero,
+                "score_total": 0,
+                "nb_membres": 0,
+            }
+        
+        fams_data[fam_key]["score_total"] += c.points_actuels or 0
+        fams_data[fam_key]["nb_membres"] += 1
+    
+    # Calculate averages and prepare for sorting
+    raw_data = []
+    for fam in fams_data.values():
+        nb = fam["nb_membres"]
+        score = fam["score_total"]
+        fam["score_moyen"] = round(score / nb, 1) if nb > 0 else 0
+        raw_data.append(fam)
 
     # Sort by numero_fams (put "—" at the end)
     def sort_key(item):

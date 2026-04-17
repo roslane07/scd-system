@@ -411,3 +411,42 @@ def list_anciens_for_setup():
         }
         for a in anciens
     ]
+
+
+class AdminUpdateNumeroFamsRequest(BaseModel):
+    user_id: int
+    numero_fams: str = Field(..., min_length=1, max_length=50)
+
+
+@router.patch("/admin/numero-fams")
+def admin_update_numero_fams(
+    body: AdminUpdateNumeroFamsRequest,
+    user: Personne = Depends(get_current_user),
+):
+    """
+    Admin endpoint (P3 only): update numero_fams for any user.
+    This is for setting the real family numbers (e.g., "36-154", "49-13").
+    """
+    # Only P3 can use this endpoint
+    if user.role != ROLE_P3:
+        raise HTTPException(
+            status_code=403,
+            detail="Accès réservé aux P3 (administrateurs)",
+        )
+    
+    try:
+        target_user = Personne.get_by_id(body.user_id)
+    except Personne.DoesNotExist:
+        raise HTTPException(status_code=404, detail="Utilisateur introuvable")
+    
+    old_numero = target_user.numero_fams
+    target_user.numero_fams = body.numero_fams.strip()
+    target_user.save()
+    
+    return {
+        "status": "ok",
+        "message": f"Numéro de Fam's mis à jour pour {target_user.prenom} {target_user.nom}",
+        "user_id": target_user.id,
+        "old_numero_fams": old_numero,
+        "new_numero_fams": target_user.numero_fams,
+    }

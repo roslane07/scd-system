@@ -105,6 +105,13 @@ export const getClassementIndividuel = () => apiFetch('/classement/individuel');
 export const getClassementFams = () => apiFetch('/classement/fams');
 export const getStats = () => apiFetch('/classement/stats');
 
+// ── Admin (P3 only) ────────────────────────────────────
+export const adminUpdateNumeroFams = (user_id, numero_fams) =>
+  apiFetch('/auth/admin/numero-fams', {
+    method: 'PATCH',
+    body: JSON.stringify({ user_id, numero_fams }),
+  });
+
 // ── Helpers ──────────────────────────────────────────────
 export function getUser() {
   const raw = localStorage.getItem('scd_user');
