@@ -48,6 +48,7 @@ def classement_fams() -> list[dict]:
 
     Each Fam's score = sum of PC of all its conscrits.
     Conscrits with parent_id=null are grouped as "Sans Fam's".
+    Sorted by numero_fams (family number) ascending.
 
     Returns:
         List of dicts with rang, pa2 info, score_total, nb_membres, score_moyen
@@ -61,11 +62,11 @@ def classement_fams() -> list[dict]:
         )
         .where(Personne.role == ROLE_CONSCRIT)
         .group_by(Personne.parent_id)
-        .order_by(fn.SUM(Personne.points_actuels).desc())
     )
 
-    classement = []
-    for rang, row in enumerate(resultats, 1):
+    # Collect data first, then sort by numero_fams
+    raw_data = []
+    for row in resultats:
         if row.parent_id:
             try:
                 pa2 = Personne.get_by_id(row.parent_id)
@@ -80,14 +81,28 @@ def classement_fams() -> list[dict]:
 
         nb = row.nb_membres
         score = row.score_fam or 0
-        classement.append({
-            "rang": rang,
+        raw_data.append({
             "pa2": label,
             "numero_fams": numero,
             "score_total": score,
             "nb_membres": nb,
             "score_moyen": round(score / nb, 1) if nb > 0 else 0,
         })
+
+    # Sort by numero_fams (put "—" at the end)
+    def sort_key(item):
+        num = item["numero_fams"]
+        if num == "—" or num is None:
+            return (1, "")  # Sans Fam's at the end
+        return (0, num)  # Sort by numero_fams ascending
+
+    raw_data.sort(key=sort_key)
+
+    # Assign rang after sorting
+    classement = []
+    for rang, item in enumerate(raw_data, 1):
+        item["rang"] = rang
+        classement.append(item)
 
     return classement
 

@@ -95,8 +95,8 @@ export default function ClassementPage() {
                     {getRankMedal(fam.rang)}
                   </div>
                   <div className="name" style={{ flex: 1, marginLeft: '8px' }}>
-                    <span style={{ fontWeight: 500 }}>Famille {fam.pa2}</span>
-                    {fam.numero_fams && <small>Numéro: {fam.numero_fams}</small>}
+                    <span style={{ fontWeight: 500 }}>Fam's N°{fam.numero_fams || '—'}</span>
+                    <small>{fam.pa2}</small>
                     <small>{fam.nb_membres} membres</small>
                   </div>
                   <div className="pts" style={{ textAlign: 'right' }}>
