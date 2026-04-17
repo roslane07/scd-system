@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getUser, updateProfile, changePassword, logout } from '../api'
 import Navbar from '../components/Navbar'
@@ -13,6 +13,7 @@ export default function SettingsPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
+  const initialLoadDone = useRef(false)
 
   // Password change
   const [oldPassword, setOldPassword] = useState('')
@@ -29,10 +30,13 @@ export default function SettingsPage() {
       navigate('/login')
       return
     }
-    // Load current values from user stored in localStorage
-    setEmail(user.email || '')
-    setBuque(user.buque || '')
-    setNumeroFams(user.numero_fams || '')
+    // Load current values from user stored in localStorage (only on initial load)
+    if (!initialLoadDone.current) {
+      setEmail(user.email || '')
+      setBuque(user.buque || '')
+      setNumeroFams(user.numero_fams || '')
+      initialLoadDone.current = true
+    }
   }, [user, navigate])
 
   const handleUpdateProfile = async (e) => {
@@ -117,8 +121,6 @@ export default function SettingsPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="ton.email@exemple.com"
-              readOnly={false}
-              disabled={false}
             />
           </div>
 
@@ -130,8 +132,6 @@ export default function SettingsPage() {
               value={buque}
               onChange={(e) => setBuque(e.target.value)}
               placeholder="Ta bucque..."
-              readOnly={false}
-              disabled={false}
             />
           </div>
 
@@ -143,8 +143,6 @@ export default function SettingsPage() {
               value={numeroFams}
               onChange={(e) => setNumeroFams(e.target.value)}
               placeholder="Ex: 36-154..."
-              readOnly={false}
-              disabled={false}
             />
           </div>
 
