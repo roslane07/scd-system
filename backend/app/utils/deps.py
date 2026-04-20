@@ -15,7 +15,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from app.models.personne import Personne
 from app.utils.auth import decode_access_token
-from app.utils.constants import ROLE_ANCIEN, ROLE_P3
+from app.utils.constants import ROLE_ANCIEN, ROLE_P3, ROLE_COMITE
 
 security = HTTPBearer()
 
@@ -50,11 +50,11 @@ def get_current_user(
 
 
 def require_ancien(user: Personne = Depends(get_current_user)) -> Personne:
-    """Require at least ANCIEN role (ANCIEN or P3)."""
-    if user.role not in (ROLE_ANCIEN, ROLE_P3):
+    """Require at least ANCIEN role (ANCIEN, P3, or COMITE)."""
+    if user.role not in (ROLE_ANCIEN, ROLE_P3, ROLE_COMITE):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Accès réservé aux Anciens et P3",
+            detail="Accès réservé aux Anciens, P3 et Comité",
         )
     return user
 

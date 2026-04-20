@@ -228,7 +228,8 @@ INFRACTIONS = {
 ROLE_CONSCRIT = "CONSCRIT"
 ROLE_ANCIEN = "ANCIEN"
 ROLE_P3 = "P3"
-ROLES = [ROLE_CONSCRIT, ROLE_ANCIEN, ROLE_P3]
+ROLE_COMITE = "COMITE"  # Comité Trads - can report infractions
+ROLES = [ROLE_CONSCRIT, ROLE_ANCIEN, ROLE_P3, ROLE_COMITE]
 
 # ══════════════════════════════════════════════════════════════
 #  SOURCE TYPES (for anti-cascade)
