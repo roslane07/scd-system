@@ -8,19 +8,19 @@ Fam's: Grouped by parent_id (pa²), sum of PC, ranked DESC.
 from peewee import fn
 
 from app.models.personne import Personne
-from app.utils.constants import ROLE_CONSCRIT, ZONES
+from app.utils.constants import ROLE_CONSCRIT, ROLE_COMITE, ZONES
 
 
 def classement_individuel() -> list[dict]:
     """
-    Get individual ranking of all conscrits, sorted by points DESC.
+    Get individual ranking of all conscrits and comite members, sorted by points DESC.
 
     Returns:
         List of dicts with rang, id, nom, prenom, buque, points, zone, couleur
     """
     conscrits = (
         Personne.select()
-        .where(Personne.role == ROLE_CONSCRIT)
+        .where(Personne.role.in_([ROLE_CONSCRIT, ROLE_COMITE]))
         .order_by(Personne.points_actuels.desc())
     )
 
@@ -53,8 +53,8 @@ def classement_fams() -> list[dict]:
     Returns:
         List of dicts with rang, p3_name, numero_fams, score_total, nb_membres, score_moyen
     """
-    # Get all conscrits
-    conscrits = Personne.select().where(Personne.role == ROLE_CONSCRIT)
+    # Get all conscrits and comite members
+    conscrits = Personne.select().where(Personne.role.in_([ROLE_CONSCRIT, ROLE_COMITE]))
 
     # Group by P3's numero_fams
     fams_data = {}

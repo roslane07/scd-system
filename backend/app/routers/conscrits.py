@@ -9,7 +9,7 @@ from app.models.notification import Notification
 from app.models.probation import ProbationLog
 from app.services.probation_service import verifier_restrictions_effectives
 from app.utils.deps import get_current_user, require_ancien
-from app.utils.constants import ROLE_CONSCRIT, ZONES
+from app.utils.constants import ROLE_CONSCRIT, ROLE_COMITE, ZONES
 from app.schemas.schemas import (
     PersonneOut,
     PersonneDetail,
@@ -26,10 +26,10 @@ router = APIRouter(prefix="/conscrits", tags=["Conscrits"])
 
 @router.get("/", response_model=list[PersonneOut])
 def list_conscrits(user: Personne = Depends(require_ancien)):
-    """List all conscrits (Anciens/P3 only)."""
+    """List all conscrits and comite members (Anciens/P3 only)."""
     conscrits = (
         Personne.select()
-        .where(Personne.role == ROLE_CONSCRIT)
+        .where(Personne.role.in_([ROLE_CONSCRIT, ROLE_COMITE]))
         .order_by(Personne.nom)
     )
     return [_personne_to_dict(c) for c in conscrits]
@@ -37,13 +37,13 @@ def list_conscrits(user: Personne = Depends(require_ancien)):
 
 @router.get("/zone/{zone}", response_model=list[PersonneOut])
 def list_by_zone(zone: str, user: Personne = Depends(require_ancien)):
-    """Filter conscrits by zone."""
+    """Filter conscrits and comite members by zone."""
     if zone not in ZONES:
         raise HTTPException(status_code=400, detail=f"Zone inconnue : {zone}")
 
     conscrits = (
         Personne.select()
-        .where(Personne.role == ROLE_CONSCRIT, Personne.zone == zone)
+        .where(Personne.role.in_([ROLE_CONSCRIT, ROLE_COMITE]), Personne.zone == zone)
         .order_by(Personne.points_actuels.desc())
     )
     return [_personne_to_dict(c) for c in conscrits]
