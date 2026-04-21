@@ -19,6 +19,7 @@ from app.services.zone_service import calculer_zone
 from app.config import settings
 from app.utils.constants import (
     ROLE_CONSCRIT,
+    ROLE_COMITE,
     SOURCE_COLLECTIF,
     ACTION_MALUS_COLLECTIF,
 )
@@ -43,12 +44,12 @@ def appliquer_malus_famille(conscrit_responsable: Personne, points: int):
     if settings.RODAGE_ACTIF:
         return
 
-    # Find siblings: same pa², role=CONSCRIT, exclude self
+    # Find siblings: same pa², role=CONSCRIT or COMITE, exclude self
     freres_soeurs = (
         Personne.select()
         .where(
             Personne.parent_id == conscrit_responsable.parent_id,
-            Personne.role == ROLE_CONSCRIT,
+            Personne.role.in_([ROLE_CONSCRIT, ROLE_COMITE]),
             Personne.id != conscrit_responsable.id,
         )
     )
@@ -101,7 +102,7 @@ def appliquer_malus_promotion(conscrit_responsable: Personne, points: int):
     tous_conscrits = (
         Personne.select()
         .where(
-            Personne.role == ROLE_CONSCRIT,
+            Personne.role.in_([ROLE_CONSCRIT, ROLE_COMITE]),
             Personne.id != conscrit_responsable.id,
         )
     )
