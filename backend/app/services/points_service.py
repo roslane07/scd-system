@@ -42,6 +42,7 @@ from app.utils.constants import (
     ACTION_BONUS,
     NOTIFICATION_MESSAGES,
     ROLE_CONSCRIT,
+    ROLE_COMITE,
 )
 
 
@@ -89,7 +90,7 @@ def appliquer_infraction(
     except Personne.DoesNotExist:
         raise ValueError(f"Conscrit {conscrit_id} introuvable")
 
-    if conscrit.role != ROLE_CONSCRIT:
+    if conscrit.role not in (ROLE_CONSCRIT, ROLE_COMITE):
         raise ValueError(f"Personne {conscrit_id} n'est pas un conscrit")
 
     if conscrit.points_actuels is None:
