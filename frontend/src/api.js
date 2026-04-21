@@ -99,6 +99,11 @@ export const cancelInfraction = (logId, justification) =>
     method: 'POST',
     body: JSON.stringify({ justification }),
   });
+export const cancelMyInfraction = (logId, justification) =>
+  apiFetch(`/infractions/cancel-my/${logId}`, {
+    method: 'POST',
+    body: JSON.stringify({ justification }),
+  });
 
 // ── Classement ───────────────────────────────────────────
 export const getClassementIndividuel = () => apiFetch('/classement/individuel');

@@ -50,6 +50,54 @@ async def apply_infraction(
     return InfractionApplyResponse(**result)
 
 
+@router.post("/cancel-my/{log_id}", response_model=CancelResponse)
+async def cancel_my_log(
+    log_id: int,
+    body: CancelRequest,
+    user: Personne = Depends(require_ancien),
+):
+    """
+    Annuler sa propre infraction (Ancien/Comite uniquement).
+    L'utilisateur doit être l'auteur du log pour pouvoir l'annuler.
+    Reverses the point impact and marks the log as annulé.
+    Requires justification (min 10 characters).
+    """
+    from app.models.log import Log
+    
+    try:
+        log_original = Log.get_by_id(log_id)
+    except Log.DoesNotExist:
+        raise HTTPException(status_code=404, detail=f"Log #{log_id} introuvable")
+    
+    # Vérifier que l'utilisateur est l'auteur du log
+    if log_original.ancien_id != user.id:
+        raise HTTPException(
+            status_code=403, 
+            detail="Tu ne peux annuler que tes propres infractions"
+        )
+    
+    # Vérifier que ce n'est pas un log collectif ou déjà annulé
+    if log_original.source_type != "DIRECT":
+        raise HTTPException(
+            status_code=400,
+            detail="Impossible d'annuler un log collectif ou système"
+        )
+    
+    try:
+        result = annuler_log(
+            log_id=log_id,
+            p3_id=user.id,
+            justification=body.justification,
+        )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    # Flush WebSocket notifications
+    await flush_notifications()
+
+    return CancelResponse(**result)
+
+
 @router.post("/cancel/{log_id}", response_model=CancelResponse)
 async def cancel_log(
     log_id: int,
