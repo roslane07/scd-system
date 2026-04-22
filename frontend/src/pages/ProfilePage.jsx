@@ -206,7 +206,7 @@ export default function ProfilePage() {
             history.slice(0, 20).map((log, index) => {
               const dateStr = new Date(log.timestamp).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' })
               const isAnnule = log.annule
-              const canCancel = !isAnnule && log.ancien_id === currentUser?.id && log.source_type === 'DIRECT'
+              const canCancel = !isAnnule && Number(log.ancien_id) === Number(currentUser?.id) && log.source_type === 'DIRECT'
               
               return (
                 <div key={log.id} style={{ display: 'flex', alignItems: 'center', padding: '14px 16px', borderBottom: index < Math.min(history.length, 20) - 1 ? '1px solid var(--border)' : 'none', opacity: isAnnule ? 0.5 : 1 }}>
