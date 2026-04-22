@@ -27,6 +27,11 @@ export default function LoginPage() {
         password
       )
       
+      // Check if login returned valid data
+      if (!data || !data.access_token) {
+        throw new Error("Identifiants incorrects")
+      }
+      
       saveAuth(data)
       
       if (data.first_login) {
