@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { getConscrit, getHistorique, getFam, getZoneClass, getZoneEmoji, getUser, cancelMyInfraction } from '../api'
+import { getConscrit, getHistorique, getFam, getZoneClass, getZoneEmoji, getUser, cancelMyInfraction, cancelInfraction } from '../api'
 
 export default function ProfilePage() {
   const { id } = useParams()
@@ -41,7 +41,12 @@ export default function ProfilePage() {
     setCancelLoading(true)
     setCancelError('')
     try {
-      await cancelMyInfraction(logId, justification)
+      // P3 uses cancelInfraction, others use cancelMyInfraction
+      if (currentUser?.role === 'P3') {
+        await cancelInfraction(logId, justification)
+      } else {
+        await cancelMyInfraction(logId, justification)
+      }
       // Refresh history
       const histData = await getHistorique(id)
       setHistory(histData)
@@ -206,7 +211,9 @@ export default function ProfilePage() {
             history.slice(0, 20).map((log, index) => {
               const dateStr = new Date(log.timestamp).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' })
               const isAnnule = log.annule
-              const canCancel = !isAnnule && Number(log.ancien_id) === Number(currentUser?.id) && log.source_type === 'DIRECT'
+              const isAuthor = Number(log.ancien_id) === Number(currentUser?.id)
+              const isP3 = currentUser?.role === 'P3'
+              const canCancel = !isAnnule && (isAuthor || isP3) && log.source_type === 'DIRECT'
               
               return (
                 <div key={log.id} style={{ display: 'flex', alignItems: 'center', padding: '14px 16px', borderBottom: index < Math.min(history.length, 20) - 1 ? '1px solid var(--border)' : 'none', opacity: isAnnule ? 0.5 : 1 }}>
